@@ -7,5 +7,11 @@ pipeline {
       }
     }
 
+    stage('') {
+      steps {
+        archiveArtifacts(artifacts: 'build.log', fingerprint: true, onlyIfSuccessful: true)
+      }
+    }
+
   }
 }

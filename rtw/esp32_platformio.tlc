@@ -1,0 +1,46 @@
+%% SYSTLC: esp32 target target TMF: esp32_platformio.tmf MAKE: make_rtw \
+%%    EXTMODE: ext_comm
+
+%selectfile NULL_FILE
+
+%%
+%% System Target File for Platform.IO ESP32
+%%
+%% $ esp32_platformio.tlc 2020-01 jaf $
+%%
+
+%assign CodeFormat = "Embedded-C"
+%assign TargetType = "RT"
+%assign Language   = "C"
+
+%include "codegenentry.tlc"
+
+/%
+  BEGIN_RTW_OPTIONS
+
+  oIdx = 1;
+  rtwoptions(oIdx).prompt        = 'ESP32 Platform.IO';
+  rtwoptions(oIdx).type          = 'Category';
+  rtwoptions(oIdx).enable        = 'on';  
+  rtwoptions(oIdx).default       = 1
+  rtwoptions(oIdx).tlcvariable   = '';
+  rtwoptions(oIdx).tooltip       = '';
+  rtwoptions(oIdx).callback      = '';
+  rtwoptions(oIdx).makevariable  = '';
+
+  %----------------------------------------%
+  % Configure RTW code generation settings %
+  %----------------------------------------%
+    
+  rtwgensettings.DerivedFrom = 'ert.tlc';
+  rtwgensettings.BuildDirSuffix = '_esp32pio';
+  rtwgensettings.Version = '1';
+  rtwgensettings.SelectCallback = ['esp32pio_SelectCallback(hDlg, hSrc)'];
+  rtwgensettings.ActivateCallback = ['esp32pio_ActivateCallback(hDlg, hSrc)'];
+  rtwgensettings.PostApplyCallback = ['esp32pio_PostApplyCallback(hDlg, hSrc)'];
+ 
+
+  END_RTW_OPTIONS 
+ %/
+
+%% [EOF]: esp32_platformio.tlc

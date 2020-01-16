@@ -1,0 +1,47 @@
+%%
+%% Source File Template
+%%
+%% $ sourceFileTemplate.cgt 2020-01 jed-frey $
+%%
+/**************************************************************************
+Code generated for Simulink model: %<ModelName>.
+Model version                    : %<ModelVersion>
+Simulink Coder version           : %<RTWFileVersion>
+TLC version                      : %<TLCVersion>
+C/C++ source code generated on   : %<SourceGeneratedOn>
+***************************************************************************
+%<CodeGenSettings>
+***************************************************************************
+esp32_platformio - Copyright (c) 2020 
+All rights reserved. 
+*/
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Required tokens.  You can insert comments and other tokens in between them,
+%% but do not change their order or remove them.
+%%
+/* Includes */
+%<Includes>
+
+/* Defines */
+%<Defines>
+
+/* Types */
+%<Types>
+
+/* Enums */
+%<Enums>
+
+/* Definitions */
+%<Definitions>
+
+/* Declarations */
+%<Declarations>
+
+/* Functions */
+%<Functions>
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Custom file trailer (optional)
+%%
+/* [EOF] %<FileName> */

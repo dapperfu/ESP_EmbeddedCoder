@@ -12,40 +12,10 @@
 MAKECMD         = "%MATLAB%\bin\win32\gmake"
 MODEL           = |>MODEL_NAME<|
 MODULES         = |>MODEL_MODULES<|
-#SHELL           = cmd
 HOST            = UNIX
 BUILD           = yes
-SYS_TARGET_FILE = ChibiOS.tlc
+SYS_TARGET_FILE = esp32pio.tlc
 MAKEFILE_FILESEP = /
-
-##############################################################################
-# Build global options
-# NOTE: Can be overridden externally.
-#
-# Compiler options here.
-ifeq ($(USE_OPT),)
-  USE_OPT = -O2 -ggdb -fomit-frame-pointer -falign-functions=16
-endif
-
-# C specific options here (added to USE_OPT).
-ifeq ($(USE_COPT),)
-  USE_COPT = 
-endif
-
-# C++ specific options here (added to USE_OPT).
-ifeq ($(USE_CPPOPT),)
-  USE_CPPOPT = -fno-rtti
-endif
-
-# Enable this if you want the linker to remove unused code and data
-ifeq ($(USE_LINK_GC),)
-  USE_LINK_GC = yes
-endif
-
-# If enabled, this option allows to compile the application in THUMB mode.
-ifeq ($(USE_THUMB),)
-  USE_THUMB = yes
-endif
 
 # Enable this if you want to see the full log while compiling.
 ifeq ($(USE_VERBOSE_COMPILE),)

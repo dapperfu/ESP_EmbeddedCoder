@@ -1,5 +1,5 @@
 function sl_customization(cm)
-% sl_customization for PIL connectivity config: ChibiOS.ConnectivityConfig
+% sl_customization for PIL connectivity config.
 
 % Copyright 2008 The MathWorks, Inc.
 % $Revision: 1.1.6.2 $
@@ -9,8 +9,8 @@ end
 % local function
 function config = loc_createConfig
 config = rtw.connectivity.ConfigRegistry;
-config.ConfigName = 'ChibiOS';
+config.ConfigName = 'ESP32 PlatformIO';
 config.ConfigClass = 'chibiOS.ConnectivityConfig';
-config.SystemTargetFile = {'ChibiOS.tlc'};
-config.TemplateMakefile = {'ChibiOS.tmf'};
+config.SystemTargetFile = {'esp32pio.tlc'};
+config.TemplateMakefile = {'esp32pio.tmf'};
 end

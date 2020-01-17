@@ -8,10 +8,23 @@ pipeline {
         sh 'git submodule foreach git clean -xfd'
       }
     }
+
     stage('platformio example builds') {
-      steps {
-        sh 'cd platform-espressif32/examples/espidf-blink/; platformio run'
+      parallel {
+        stage('espidf-blink') {
+          steps {
+            sh 'cd platform-espressif32/examples/espidf-blink/; platformio run'
+          }
+        }
+
+        stage('espidf-arduino-blink') {
+          steps {
+            sh 'cd platform-espressif32/examples/espidf-arduino-blink/; platformio run'
+          }
+        }
+
       }
     }
+
   }
 }

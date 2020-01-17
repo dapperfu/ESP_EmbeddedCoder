@@ -1,2 +1,3 @@
-# platformio_ESP32_EmbeddedCoder
-Simulink Embedded Coder target for ESP32 using platform.io
+# platform-espressif32 example build branch
+
+Branch specifically to build platform-espressif32 examples as a baseline for code generation.

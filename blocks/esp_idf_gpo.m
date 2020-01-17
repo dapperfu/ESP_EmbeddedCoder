@@ -1,4 +1,4 @@
-function pal_Config(block)
+function esp_idf_gpo(block)
 %MSFUNTMPL_BASIC A Template for a Level-2 MATLAB S-Function
 %   The MATLAB S-function is written as a MATLAB function with the
 %   same name as the S-function. Replace 'msfuntmpl_basic' with the 
@@ -33,8 +33,8 @@ setup(block);
 %%
 function setup(block)
 % Register number of ports
-block.NumInputPorts  = 16;
-block.NumOutputPorts = 16;
+block.NumInputPorts  = 1;
+block.NumOutputPorts = 0;
 
 % Setup port properties to be inherited or dynamic
 block.SetPreCompInpPortInfoToDynamic;
@@ -53,35 +53,20 @@ for i=1:block.NumOutputPorts
     block.OutputPort(i).Complexity  = 'Real';
     block.OutputPort(i).SamplingMode  = 0;
 end
-% % Override output port properties
-% block.OutputPort(1).Dimensions  = 1;
-% block.OutputPort(1).DatatypeID  = 5; % double
-% block.OutputPort(1).Complexity  = 'Real';
-% block.OutputPort(1).SamplingMode  = 0;
-% 
-% block.OutputPort(2).Dimensions  = 1;
-% block.OutputPort(2).DatatypeID  = 7; % double
-% block.OutputPort(2).Complexity  = 'Real';
-% block.OutputPort(2).SamplingMode  = 0;
 
 % Register parameters
-block.NumDialogPrms     = 18;
-tmp = cell(1,block.NumDialogPrms);
-for i=1:block.NumDialogPrms
-    tmp{i}='Nontunable';
-end
-block.DialogPrmsTunable=tmp;
+block.NumDialogPrms     = 3;
 % Register sample times
 %  [0 offset]            : Continuous sample time
 %  [positive_num offset] : Discrete sample time
 %
 %  [-1, 0]               : Inherited sample time
 %  [-2, 0]               : Variable sample time
-if length(block.DialogPrm(block.NumDialogPrms).Data)==1
-    block.SampleTimes = [block.DialogPrm(block.NumDialogPrms).Data 0];
-else
-    block.SampleTimes = block.DialogPrm(block.NumDialogPrms).Data;
-end
+% if length(block.DialogPrm(block.NumDialogPrms).Data)==1
+%     block.SampleTimes = [block.DialogPrm(block.NumDialogPrms).Data 0];
+% else
+%     block.SampleTimes = block.DialogPrm(block.NumDialogPrms).Data;
+% end
 % Specify the block simStateCompliance. The allowed values are:
 %    'UnknownSimState', < The default setting; warn and assume DefaultSimState
 %    'DefaultSimState', < Same sim state as a built-in block
@@ -123,32 +108,7 @@ block.AutoRegRuntimePrms;
 %end function
 
 function WriteRTW(block)
-% Port
-block.WriteRTWParam('string','portName', sprintf('GPIO%s',block.DialogPrm(1).Data));
-% Pin 0-15
-for i=0:15
-    pin=sprintf('pin%d',i);
-    pinMode=sprintf('pinMode%d',i);
-    switch block.DialogPrm(i+2).Data
-        case 'Disabled'
-            block.WriteRTWParam('string',pin,  'Disabled');
-        case 'Input - No Pull'
-            block.WriteRTWParam('string',pin,  'Input');
-            block.WriteRTWParam('string',pinMode,  'PAL_MODE_INPUT');
-        case 'Input - Pull Up'
-            block.WriteRTWParam('string',pin,  'Input');
-            block.WriteRTWParam('string',pinMode,  'PAL_MODE_INPUT_PULLUP');
-        case 'Input - Pull Down'
-            block.WriteRTWParam('string',pin,  'Input');
-            block.WriteRTWParam('string',pinMode,  'PAL_MODE_INPUT_PULLDOWN');
-        case 'Output - Open Drain'
-            block.WriteRTWParam('string',pin,  'Output');
-            block.WriteRTWParam('string',pinMode,  'PAL_MODE_OUTPUT_OPENDRAIN');
-        case 'Output - Push Pull'
-            block.WriteRTWParam('string',pin,  'Output');
-            block.WriteRTWParam('string',pinMode,  'PAL_MODE_OUTPUT_PUSHPULL');
-        case 'Toggle'
-            block.WriteRTWParam('string',pin,  'Toggle');
-            block.WriteRTWParam('string',pinMode,  'PAL_MODE_OUTPUT_PUSHPULL');
-    end
+for field = get_param(block.BlockHandle, 'MaskNames')'
+    block.WriteRTWParam('string', field{1}, get_param(block.BlockHandle, field{1}));
 end
+%end function

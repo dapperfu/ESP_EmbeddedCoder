@@ -33,7 +33,7 @@
   %----------------------------------------%
     
   rtwgensettings.DerivedFrom = 'ert.tlc';
-  rtwgensettings.BuildDirSuffix = '_esp32pio';
+  rtwgensettings.BuildDirSuffix = '_esp32pio_rtw';
   rtwgensettings.Version = '1';
   rtwgensettings.SelectCallback = ['esp32pio_SelectCallback(hDlg, hSrc)'];
   rtwgensettings.ActivateCallback = ['esp32pio_ActivateCallback(hDlg, hSrc)'];

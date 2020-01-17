@@ -5,12 +5,12 @@ pipeline {
       steps {
         sh 'git clean -xfd'
         sh 'git submodule update --init'
-        sh 'git submodule foreach git clean -xfd'
+        sh 'git submodule foreach git clean -xfd
       }
     }
-    stage('platformio example builds') {
+    stage('simulink_embedded_coder') {
       steps {
-        sh 'cd platform-espressif32/examples/espidf-blink/; platformio run'
+        sh './build.sh'
       }
     }
   }

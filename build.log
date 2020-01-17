@@ -1,1 +1,13 @@
-Start Build
+%% Startup set path for platformio ESP32
+[Warning: An error occurred while evaluating "locTflRegFcn":
+Unrecognized property 'TargetHWDevice' for class
+'RTW.TflRegistry'.
+This custom registration is not loaded.] 
+### Code generation artifacts for 'test_esp_idf_gpio' were unpacked from '/projects/ChibiOS_SimulinkBlockset/platformio_ESP32_EmbeddedCoder/blocks/test_esp_idf_gpio.slxc'.
+### Starting build procedure for model: test_esp_idf_gpio
+### Generating code and artifacts to 'Model specific' folder structure
+### Generating code into build folder: /projects/ChibiOS_SimulinkBlockset/platformio_ESP32_EmbeddedCoder/blocks/test_esp_idf_gpio_ert_rtw
+### Generated code for 'test_esp_idf_gpio' is up to date because no structural, parameter or code replacement library changes were found.
+### Using toolchain: GNU gcc/g++ | gmake (64-bit Linux)
+### '/projects/ChibiOS_SimulinkBlockset/platformio_ESP32_EmbeddedCoder/blocks/test_esp_idf_gpio_ert_rtw/test_esp_idf_gpio.mk' is up to date
+### Successful completion of code generation for model: test_esp_idf_gpio

@@ -21,5 +21,11 @@ pipeline {
       }
     }
 
+    stage('Archive Artifacts') {
+      steps {
+        archiveArtifacts(artifacts: 'build.log', fingerprint: true, onlyIfSuccessful: true)
+      }
+    }
+
   }
 }

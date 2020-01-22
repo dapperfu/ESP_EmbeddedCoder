@@ -1,5 +1,5 @@
-%% File : espidf_gpio.tlc
-%implements  espidf_gpo "C"
+%% File : espidf_uart.tlc
+%implements  espidf_uart "C"
 
 %% Function: BlockInstanceSetup ===================================================
 %%
@@ -17,7 +17,7 @@
 %%      generated code.
 %%
 %function BlockTypeSetup(block, system) Output
-    %<LibAddToCommonIncludes("driver/gpio.h")>
+    %<LibAddToCommonIncludes("driver/uart.h")>
 %endfunction
 
 %% Function: Enable =============================================================
@@ -33,13 +33,39 @@
 %% InitializeConditions: Start =============================================================
 %%
 %function InitializeConditions(block, system) Output
-    /* InitializeConditions espidf output: %<Name> */
-    gpio_set_direction(%<block.ParamSettings.gpio_num>, GPIO_MODE_OUTPUT);
+    /* 
+        InitializeConditions espidf uart:
+        %<Name> 
+        %<Identifier>
+    */
+    %assign buffer = "uart_buffer_size%<Identifier>"
+    // Setup UART buffered IO with event queue
+    const int %<buffer> = (1024 * 2);
+    QueueHandle_t uart_queue;
+    // Install UART driver using an event queue here
+    ESP_ERROR_CHECK(uart_driver_install(UART_NUM_2, %<buffer>, %<buffer>, 10, &uart_queue, 0));
 %endfunction
 
 %% Function: Start =============================================================
 %%
 %function Start(block, system) Output
+    /* 
+        start: espidf uart
+        %<Name> 
+        %<Identifier>
+    */
+const int uart_buffer_size = (1024 * 2);
+QueueHandle_t uart_queue;
+// Install UART driver using an event queue here
+ESP_ERROR_CHECK(
+    uart_driver_install(
+        UART_NUM_2,
+        uart_buffer_size,
+        uart_buffer_size,
+        10,
+        &uart_queue,
+        0)
+);
 %endfunction
 
 %% Function: Outputs ==========================================================
@@ -48,13 +74,19 @@
 %%      Code generation rules for mdlOutputs function.
 %%
 %function Outputs(block, system) Output
-    /* output: esp-idf output: %<Name>  %<Identifier>*/
-    gpio_set_level(%<block.ParamSettings.gpio_num>,%<LibBlockInputSignal(0, "", "", 0)>);
+    /* 
+        output:espidf uart
+        %<Name> 
+        %<Identifier>
+    */
+    char* test_str = "This is a test string.\n";
+    uart_write_bytes(uart_num, (const char*)test_str, strlen(test_str));
 %endfunction
 
 %% Function: Update =============================================================
 %%
 %function Update(block, system) Output
+    /* update: espidf uart: %<Name>  %<Identifier>*/
 %endfunction
 
 
@@ -66,4 +98,10 @@
 %% Function: Terminate =============================================================
 %%
 %function Terminate(block, system) Output
+    /*
+        terminate: espidf uart
+        %<Name>
+        %<Identifier>
+    */
+    uart_driver_delete();
 %endfunction

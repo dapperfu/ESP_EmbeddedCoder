@@ -8,7 +8,7 @@ pipeline {
     }
     stage('simulink_embedded_coder') {
       steps {
-        sh './build.sh'
+        sh './build_examples.sh'
       }
       steps {
         sh './build_esp32pio_from_templates.sh'

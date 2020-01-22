@@ -1,4 +1,5 @@
 **/*_rtw
 **/*.slxc
 **/slprj/*
-build_dir/*
+build/*
+**/*.log

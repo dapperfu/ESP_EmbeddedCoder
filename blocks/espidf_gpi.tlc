@@ -23,106 +23,6 @@
 %%      generated code.
 %%
 %function BlockInstanceSetup(block, system) Output
-    %assign modelH      = LibGetModelDotHFile()
-    %assign modelC      = LibGetModelDotCFile()
-    
-    %openfile buffer0
-        /* LibHeaderFileCustomCode - esp-idf input */
-    %closefile buffer0
-    %<LibHeaderFileCustomCode(buffer0, "header")>
-    
-    %openfile buffer
-        /* LibCacheDefine - esp-idf input */
-    %closefile buffer
-    %<LibCacheDefine(buffer)>
-
-    %openfile buffer2
-        /* LibCacheIncludes - esp-idf input */
-    %closefile buffer2
-    %<LibCacheIncludes(buffer2)>
-
-    %openfile buffer3
-        /* LibCacheExtern - esp-idf input */
-        extern void BlockTypeSetup;
-    %closefile buffer3
-    %<LibCacheExtern(buffer3)>
-
-    %openfile buffer4
-        /* LibCacheFunctionPrototype - esp-idf input */
-    %closefile buffer4
-    %<LibCacheFunctionPrototype(buffer)>
-
-   %% Code Sections Emitted by CFP Templates
-    %openfile buffer
-        /* Banner - esp-idf input */
-    %closefile buffer
-    %<LibSetSourceFileSection(modelC,"Banner",buffer)>
-
-    %openfile buffer
-        /* Includes - esp-idf input */
-    %closefile buffer
-    %<LibSetSourceFileSection(modelC,"Includes",buffer)>
-
-    %openfile buffer
-        /* Defines - esp-idf input */
-    %closefile buffer
-    %<LibSetSourceFileSection(modelC,"Defines",buffer)>
-
-    %openfile buffer
-        /* IntrinsicTypes - esp-idf input */
-    %closefile buffer
-    %<LibSetSourceFileSection(modelC,"IntrinsicTypes",buffer)>
-
-    %openfile buffer
-        /* PrimitiveTypedefs - esp-idf input */
-    %closefile buffer
-    %<LibSetSourceFileSection(modelC,"PrimitiveTypedefs",buffer)>
-
-    %openfile buffer
-        /* UserTop - esp-idf input */
-    %closefile buffer
-    %<LibSetSourceFileSection(modelC,"UserTop",buffer)>
-
-    %openfile buffer
-        /* Typedefs - esp-idf input */
-    %closefile buffer
-    %<LibSetSourceFileSection(modelC,"Typedefs",buffer)>
-
-    %openfile buffer
-        /* Enums - esp-idf input */
-    %closefile buffer
-    %<LibSetSourceFileSection(modelC,"Enums",buffer)>
-
-    %openfile buffer
-        /* Declarations - esp-idf input */
-    %closefile buffer
-    %<LibSetSourceFileSection(modelC,"Declarations",buffer)>
-
-    %openfile buffer
-        /* Functions - esp-idf input */
-    %closefile buffer
-    %<LibSetSourceFileSection(modelC,"Functions",buffer)>
-
-    %openfile buffer
-        /* CompilerErrors - esp-idf input */
-    %closefile buffer
-    %<LibSetSourceFileSection(modelC,"CompilerErrors",buffer)>
-
-    %openfile buffer
-        /* CompilerWarnings - esp-idf input */
-    %closefile buffer
-    %<LibSetSourceFileSection(modelC,"CompilerWarnings",buffer)>
-
-    %openfile buffer
-        /* Documentation - esp-idf input */
-    %closefile buffer
-    %<LibSetSourceFileSection(modelC,"Documentation",buffer)>
-
-    %openfile buffer
-        /* UserBottom - esp-idf input .c */
-    %closefile buffer
-    %<LibSetSourceFileSection(modelC,"UserBottom",buffer)>
-    %<LibSetSourceFileSection(modelH,"UserBottom",buffer)>
 %endfunction
 
 %% Function: BlockTypeSetup ===================================================
@@ -133,95 +33,29 @@
 %%
 %function BlockTypeSetup(block, system) Output
     %<LibAddToCommonIncludes("driver/gpio.h")>
-    %openfile buffer
-        /* LibCacheDefine - esp-idf input BlockTypeSetup */
-    %closefile buffer
-    %<LibCacheDefine(buffer)>
-
-    %openfile buffer2
-        /* LibCacheIncludes - esp-idf input BlockTypeSetup */
-    %closefile buffer2
-    %<LibCacheIncludes(buffer2)>
-
-    %openfile buffer3
-        /* LibCacheExtern - esp-idf input BlockTypeSetup */
-        extern void BlockTypeSetup;
-    %closefile buffer3
-    %<LibCacheExtern(buffer3)>
-
-    %openfile buffer4
-        /* LibCacheFunctionPrototype - esp-idf input BlockTypeSetup */
-    %closefile buffer4
-    %<LibCacheFunctionPrototype(buffer)>
 %endfunction
 
 %% Function: Enable =============================================================
 %%
 %function Enable(block, system) Output
-    /* Enable: esp-idf input %<Name> %<Identifier> */
 %endfunction
 
 %% Function: Disable =============================================================
 %%
 %function Disable(block, system) Output
-    /* Disable: esp-idf input %<Name> %<Identifier> */
 %endfunction
 
 %% InitializeConditions: Start =============================================================
 %%
 %function InitializeConditions(block, system) Output
-    /* InitializeConditions: esp-idf input %<Name> %<Identifier> */
-    gpio_config_t io_conf_%<Identifier>;
-    io_conf_%<Identifier>.intr_type = GPIO_INTR_DISABLE;
-    io_conf_%<Identifier>.mode = %<block.ParamSettings.gpio_mode>;
-    io_conf_%<Identifier>.pull_down_en = 0;
-    io_conf_%<Identifier>.pull_up_en = 0;
-    gpio_config(&io_conf_%<Identifier>);
+    /* InitializeConditions espidf input: %<Name> */
+    gpio_set_direction(%<block.ParamSettings.gpio_num>, GPIO_MODE_INPUT);
+    gpio_pulldown_en(%<block.ParamSettings.gpio_num>);
 %endfunction
 
 %% Function: Start =============================================================
 %%
 %function Start(block, system) Output
-    /*
-		start: esp-idf input
-		name:       %<Name>
-		identifier: %<Identifier>
-	*/
-	
-    %openfile buffer
-    /* header: esp-idf input %<Name> %<Identifier> */
-    %closefile buffer
-	%<LibMdlStartCustomCode(buffer,"header")>
-	
-	
-    %openfile buffer2
-    /* 
-		declaration: esp-idf input
-		name:        %<Name>
-		identifier:  %<Identifier>
-	*/
-    %closefile buffer2
-	%<LibMdlStartCustomCode(buffer2,"declaration")>
-	
-	
-    %openfile buffer3
-    /* 
-		execution: esp-idf input
-		name:        %<Name>
-		identifier:  %<Identifier>
-	*/
-    %closefile buffer3
-	%<LibMdlStartCustomCode(buffer3,"execution")>
-	
-	
-    %openfile buffer4
-    /* 
-		trailer: esp-idf input
-		name:        %<Name>
-		identifier:  %<Identifier>
-	*/
-    %closefile buffer4
-	%<LibMdlStartCustomCode(buffer4,"trailer")>
 %endfunction
 
 %% Function: Outputs ==========================================================
@@ -230,31 +64,24 @@
 %%      Code generation rules for mdlOutputs function.
 %%
 %function Outputs(block, system) Output
-    /* output: esp-idf input %<Name> %<Identifier> */
+    /* Outputs: esp-idf input %<Name> %<Identifier> */
     %<LibBlockOutputSignal(0, "", "", 0)> = gpio_get_level(%<block.ParamSettings.gpio_num>)
 %endfunction
 
 %% Function: Update =============================================================
 %%
 %function Update(block, system) Output
-    /* update: esp-idf input %<Name> %<Identifier> */
 %endfunction
 
 
 %% Function: Derivatives =============================================================
 %%
 %function Derivatives(block, system) Output
-    /* derivatives: esp-idf input %<Name> %<Identifier> */
 %endfunction
 
 %% Function: Terminate =============================================================
 %%
 %function Terminate(block, system) Output
-    /* 
-		terminate:  esp-idf input 
-		Name:       %<Name>
-		Identifier: %<Identifier>
-	*/
 %endfunction
 
 %% [EOF] esp_idf_gpi.tlc

@@ -1,4 +1,4 @@
-function esp32pio_make_rtw_hook(hookMethod,modelName,rtwroot,templateMakefile,buildOpts,buildArgs)
+function espidf_arduino_make_rtw_hook(hookMethod,modelName,rtwroot,templateMakefile,buildOpts,buildArgs)
 % ERT_MAKE_RTW_HOOK - This is the standard ERT hook file for the build
 % process (make_rtw), and implements automatic configuration of the
 % models configuration parameters.  When the buildArgs option is specified
@@ -95,7 +95,7 @@ switch hookMethod
         fid=fopen('Makefile','w');
         fprintf(fid,'\t### Modelname %s',modelName);
         fclose(fid);
-        fid = fopen('platformio.ini', 'w');
+        fid = fopen('platformio.ini', 'a');
         fprintf(fid, '[platformio]\n');
         fprintf(fid, 'src_dir = .\n');
         fprintf(fid, 'include_dir = .\n\n');

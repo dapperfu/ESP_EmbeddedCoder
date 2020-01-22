@@ -1,0 +1,30 @@
+%% SYSTLC: espidf TMF: espidf.tmf MAKE: make_rtw EXTMODE: no_ext_mode
+
+%selectfile NULL_FILE
+
+%%
+%% System Target File for espidf
+%%
+%% $ espidf.tlc 2020-Jan jaf $
+%%
+
+%assign CodeFormat = "Embedded-C"
+%assign TargetType = "RT"
+%assign Language   = "C"
+
+%include "codegenentry.tlc"
+/%
+  BEGIN_RTW_OPTIONS
+  %----------------------------------------%
+  % Configure RTW code generation settings %
+  %----------------------------------------%
+  rtwgensettings.DerivedFrom = 'ert.tlc';
+  rtwgensettings.BuildDirSuffix = '_espidf_rtw';
+  rtwgensettings.Version = '1';
+  rtwgensettings.SelectCallback = ['espidf_SelectCallback(hDlg, hSrc)'];
+  rtwgensettings.ActivateCallback = ['espidf_ActivateCallback(hDlg, hSrc)'];
+  rtwgensettings.PostApplyCallback = ['espidf_PostApplyCallback(hDlg, hSrc)'];
+  END_RTW_OPTIONS 
+ %/
+
+%% [EOF]: espidf.tlc

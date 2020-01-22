@@ -1,12 +1,11 @@
-function esp32pio_DefaultConfigSet(hDlg, hSrc)
-% esp32pio_DEFAULTCONFIGSET sets the target
+function espidf_DefaultConfigSet(hDlg, hSrc)
+% espidf_DEFAULTCONFIGSET sets the target
 
 disp(mfilename)
 %% Set default RTW parameters for ChibiOS target:
-tabs={'CodeStyleTab'};
+tabs={'SolverTab', 'CodeStyleTab', 'CodeGenerationTab', 'ReportTab', 'InterfaceTab', 'TemplatesTab', 'CodeStyleTab'};
 n=numel(tabs);
 for i=1:n
-    waitbar(i/(2*n));
     feval(tabs{i},hDlg,hSrc)
 end
 
@@ -15,14 +14,8 @@ function SolverTab(hDlg,hSrc) %#ok<*DEFNU>
 slConfigUISetVal(hDlg, hSrc,     'SolverName','FixedStepDiscrete')
 slConfigUISetEnabled(hDlg, hSrc, 'SolverName', false);
 
-slConfigUISetVal(hDlg, hSrc,     'FixedStep','auto')
+slConfigUISetVal(hDlg, hSrc,     'FixedStep','0.1')
 slConfigUISetEnabled(hDlg, hSrc, 'FixedStep', true);
-
-%% HardwareImplementation tab **********************************************************
-function HardwareImplementationTab(hDlg, hSrc)
-slConfigUISetVal(hDlg, hSrc,     'ProdHWDeviceType','STMicroelectronics->STM32F4xx 32-bit Cortex-M4')
-slConfigUISetEnabled(hDlg, hSrc, 'ProdHWDeviceType', true);
-
 
 %% General tab *************************************************************
 function CodeGenerationTab(hDlg, hSrc)
@@ -32,7 +25,7 @@ slConfigUISetEnabled(hDlg, hSrc, 'GenerateMakefile', false);
 slConfigUISetVal(hDlg, hSrc,     'MakeCommand','make_rtw')
 slConfigUISetEnabled(hDlg, hSrc, 'MakeCommand', false);
 
-slConfigUISetVal(hDlg, hSrc,     'TemplateMakefile','esp32_platformio.tmf')
+slConfigUISetVal(hDlg, hSrc,     'TemplateMakefile','espidf.tmf')
 slConfigUISetEnabled(hDlg, hSrc, 'TemplateMakefile', true);
 
 %% Report tab **************************************************************
@@ -50,25 +43,13 @@ slConfigUISetEnabled(hDlg, hSrc, 'SupportContinuousTime', true);
 
 % Templates tab ***********************************************************
 function TemplatesTab(hDlg, hSrc)
-slConfigUISetVal(hDlg, hSrc,     'ERTCustomFileTemplate','esp32pio_customRoutineProcess.tlc')
+slConfigUISetVal(hDlg, hSrc,     'ERTCustomFileTemplate','espidf_main.tlc')
 slConfigUISetEnabled(hDlg, hSrc, 'ERTCustomFileTemplate', true);
 
-slConfigUISetVal(hDlg, hSrc,     'ERTSrcFileBannerTemplate','esp32pio_sourceFileTemplate.cgt')
-slConfigUISetEnabled(hDlg, hSrc, 'ERTSrcFileBannerTemplate', true);
-
-slConfigUISetVal(hDlg, hSrc,     'ERTHdrFileBannerTemplate','esp32pio_sourceFileTemplate.cgt')
-slConfigUISetEnabled(hDlg, hSrc, 'ERTHdrFileBannerTemplate', true);
-
-slConfigUISetVal(hDlg, hSrc,     'ERTDataSrcFileTemplate','esp32pio_sourceFileTemplate.cgt')
-slConfigUISetEnabled(hDlg, hSrc, 'ERTDataSrcFileTemplate', true);
-
-slConfigUISetVal(hDlg, hSrc,     'ERTDataHdrFileTemplate','esp32pio_sourceFileTemplate.cgt')
-slConfigUISetEnabled(hDlg, hSrc, 'ERTDataHdrFileTemplate', true);
-
-slConfigUISetVal(hDlg, hSrc,     'GenerateSampleERTMain','off')
+slConfigUISetVal(hDlg, hSrc,     'GenerateSampleERTMain','on')
 slConfigUISetEnabled(hDlg, hSrc, 'GenerateSampleERTMain', false);
 
-slConfigUISetVal(hDlg, hSrc,     'IncludeMdlTerminateFcn','off')
+slConfigUISetVal(hDlg, hSrc,     'IncludeMdlTerminateFcn','on')
 slConfigUISetEnabled(hDlg, hSrc, 'IncludeMdlTerminateFcn', true);
 
 % CodeStyle tab ***********************************************************
@@ -84,5 +65,3 @@ slConfigUISetEnabled(hDlg, hSrc, 'PreserveIfCondition', true);
 
 slConfigUISetVal(hDlg, hSrc,     'ConvertIfToSwitch','on')
 slConfigUISetEnabled(hDlg, hSrc, 'ConvertIfToSwitch', true);
-% [EOF] esp32pio_DefaultConfigSet.m
-

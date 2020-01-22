@@ -1,1 +1,4 @@
 **/*_rtw
+**/*.slxc
+**/slprj/*
+build_dir/*

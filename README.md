@@ -1,3 +1,6 @@
-# platform-espressif32 example build branch
+# Simulink Embedded Coder ESP32 (ESP-IDF)
 
-Branch specifically to build platform-espressif32 examples as a baseline for code generation.
+Embedded Coder custom targets for ESP32 boards.
+
+- FreeRTOS/ESP-IDF
+- FreeRTOS/Arduino

@@ -10,6 +10,9 @@ pipeline {
       steps {
         sh './build.sh'
       }
+      steps {
+        sh './build_esp32pio_from_templates.sh'
+      }
     }
   }
 }

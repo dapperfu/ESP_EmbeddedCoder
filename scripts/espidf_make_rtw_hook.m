@@ -59,9 +59,6 @@ function esp32pio_make_rtw_hook(hookMethod,modelName,rtwroot,templateMakefile,bu
 % You are encouraged to add other configuration options, and extend the
 % various callbacks to fully integrate ERT into your environment.
 
-% Copyright 1996-2010 The MathWorks, Inc.
-% $Revision: 1.1.6.2 $ $Date: 2011/10/31 06:09:30 $
-
 fprintf('###########################################################################\n');
 fprintf('#### %s: %s\n',mfilename,hookMethod);
 fprintf('###########################################################################\n');
@@ -98,6 +95,16 @@ switch hookMethod
         fid=fopen('Makefile','w');
         fprintf(fid,'\t### Modelname %s',modelName);
         fclose(fid);
+        fid = fopen('platformio.ini', 'a');
+        fprintf(fid, '[platformio]\n');
+        fprintf(fid, 'src_dir = .\n');
+        fprintf(fid, 'include_dir = .\n\n');
+        fprintf(fid, '[env:esp-wrover-kit]\n');
+        fprintf(fid, 'platform = espressif32\n');
+        fprintf(fid, 'framework = espidf\n');
+        fprintf(fid, 'board = esp-wrover-kit\n');
+        fprintf(fid, 'monitor_speed = 115200\n');
+        fclose(fid);
         
     case 'after_make'
         % Called after make process is complete. All arguments are valid at
@@ -105,8 +112,6 @@ switch hookMethod
     case 'exit'
         % Called at the end of the build process.  All arguments are valid
         % at this stage.
-        
-        
         if strcmp(get_param(modelName,'GenCodeOnly'),'off')
             msgID = 'RTW:makertw:exitRTWBuild';
         else
